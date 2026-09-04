@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de Personagens</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="portal-glow"></div>
+
+    <main>
+
+        <div class="app-shell">
+
+            <header class="app-header">
+
+                <h1>Buscador de Personagens</h1>
+                <p class="subtitle">Explore o multiverso, um personagem por vez</p>
+                <p id="results-stats" class="results-stats"></p>
+
+            </header>
+
+            <div id="spotlight-banner" class="spotlight">
+
+                <p class="spotlight-loading">Sorteando um personagem em destaque...</p>
+
+            </div>
+
+            <div class="search-bar">
+
+                <input
+                    type="text"
+                    id="search-input"
+                    class="search-input"
+                    placeholder="Buscar personagem por nome..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+            <div class="filters-bar">
+
+                <select id="status-filter" class="filter-select">
+                    <option value="">Status: Todos</option>
+                    <option value="alive">Vivo</option>
+                    <option value="dead">Morto</option>
+                    <option value="unknown">Desconhecido</option>
+                </select>
+
+                <select id="gender-filter" class="filter-select">
+                    <option value="">Gênero: Todos</option>
+                    <option value="male">Masculino</option>
+                    <option value="female">Feminino</option>
+                    <option value="genderless">Sem gênero</option>
+                    <option value="unknown">Desconhecido</option>
+                </select>
+
+                <select id="species-filter" class="filter-select">
+                    <option value="">Espécie: Todas</option>
+                    <option value="human">Humano</option>
+                    <option value="alien">Alienígena</option>
+                    <option value="humanoid">Humanoide</option>
+                    <option value="robot">Robô</option>
+                    <option value="animal">Animal</option>
+                    <option value="mythological creature">Criatura mitológica</option>
+                    <option value="unknown">Desconhecida</option>
+                </select>
+
+                <select id="sort-select" class="filter-select">
+                    <option value="">Ordenar: Padrão</option>
+                    <option value="asc">Nome A-Z (nesta página)</option>
+                    <option value="desc">Nome Z-A (nesta página)</option>
+                </select>
+
+            </div>
+
+            <div class="actions-bar">
+
+                <button id="favorites-toggle-button" class="btn btn-small" type="button">☆ Ver favoritos</button>
+                <button id="random-button" class="btn btn-small" type="button">🎲 Sortear outro destaque</button>
+
+            </div>
+
+            <div id="app-content" class="app-content">
+
+                <!-- Estado: carregando (skeleton cards, preenchido via JS) -->
+                <div id="loading-state" class="state">
+
+                    <div id="skeleton-grid" class="character-grid"></div>
+
+                </div>
+
+                <!-- Estado: erro de rede -->
+                <div id="error-state" class="state hidden">
+
+                    <p class="state-message">Não foi possível conectar ao multiverso agora.</p>
+                    <button id="retry-button" class="btn" type="button">Tentar novamente</button>
+
+                </div>
+
+                <!-- Estado: nenhum resultado -->
+                <div id="empty-state" class="state hidden">
+
+                    <p id="empty-state-message" class="state-message">Nenhum personagem encontrado com esse nome.</p>
+
+                </div>
+
+                <!-- Estado: lista de resultados -->
+                <div id="results-state" class="state hidden">
+
+                    <div id="character-grid" class="character-grid"></div>
+
+                    <div class="pagination">
+
+                        <button id="prev-button" class="btn btn-small" type="button" disabled>← Anterior</button>
+                        <span id="page-indicator" class="page-indicator"></span>
+                        <button id="next-button" class="btn btn-small" type="button" disabled>Próxima →</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Painel de detalhe do personagem, sobreposto à tela -->
+    <div id="detail-overlay" class="detail-overlay hidden">
+
+        <div id="detail-panel" class="detail-panel">
+
+            <button id="close-detail" class="close-button" type="button" aria-label="Fechar detalhes">✕</button>
+
+            <div id="detail-content" class="detail-content"></div>
+
+        </div>
+
+    </div>
+
+    <script type="module" src="main.js"></script>
+
+</body>
+</html>
